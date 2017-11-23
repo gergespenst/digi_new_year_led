@@ -20,7 +20,7 @@
 
 typedef void (*PCALLFUNC)(uint8_t);
 
-void InitAdcKeyboard(PCALLFUNC func);
+inline void InitAdcKeyboard(PCALLFUNC func);
 void InitAdcKeyboard(PCALLFUNC pressFunc,PCALLFUNC longPressFunc);
 void ScanKayboard();
 

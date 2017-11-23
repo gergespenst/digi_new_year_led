@@ -11,7 +11,7 @@
 #include <avr/io.h>
 #include <avr/interrupt.h>
 
-void InitSysTimer(){
+inline void InitSysTimer(){
 	//Системнй таймер с переполнением раз в 1 мс
 	PLLCSR=0x00;
 	// Timer/Counter 0 initialization
@@ -54,7 +54,7 @@ void Blink(){
 
 
 #pragma inline=forced
-static void InitWS2110(){
+inline static void InitWS2110(){
 	INIT_LED_GPIO();
 	InitLedColors();
 }
@@ -63,11 +63,11 @@ void callbac(uint8_t data){
 	switch (data)
 	{
 	case KEY0:{
-	NextColorEffect();
+		NextEffect();
 	}
 		break;
 	case KEY1:
-	NextBrightnessEffect();
+	
 		break;
 	case KEY2:
 	
@@ -98,7 +98,7 @@ void long_press(uint8_t key){
 		}
 }
 
-int main(){
+__ATTR_NORETURN__ int main(){
 	
 	InitBlink();
 	InitSysTimer();	
@@ -107,13 +107,13 @@ int main(){
 	sei();
 	
 	AddTask(Blink,0,1000);
-	//AddTask(UpdateColor,0,0x50);
+	AddTask(UpdateAll,0,0x50);
 	AddTask(SendAllPixels,0,10);
 	AddTask(ScanKayboard,0,100);
 	while (1)
 	{
 		Dispatcher();
 	}
-	return 0;
+//	return 0;
 }
 

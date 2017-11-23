@@ -20,9 +20,12 @@ void SetBrightnessEffect(uint8_t effect,uint8_t speed);
 void NextBrightnessEffect();
 void NextPalette();
 void InitLedColors();
+void UpdateAll();
+void NextEffect();
 void SetColorEffect(uint8_t effect,uint8_t speed);
 void NextColorEffect();
 void UpdateBrightness();
+void RandomColor();
 void UpdateColor();
 
 

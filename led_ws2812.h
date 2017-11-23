@@ -60,4 +60,5 @@ uint8_t SetPixColor(uint8_t pixnum,T_PIXEL color,uint8_t br);
 uint8_t SetPixBrightness(uint8_t pixnum,uint8_t br);
 T_PIXEL GetPix(uint8_t pixnum);
 
+uint8_t GetPixBr(uint8_t pixnum);
 #endif

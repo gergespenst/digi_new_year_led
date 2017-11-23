@@ -1,9 +1,12 @@
 #include "led_effects.h"
 
 static uint8_t 	g_colorEffect = 0, g_colorSpeed = 0x05,
-				g_brEffect = 0, g_brSpeed = 0x05;
+				g_brEffect = 0, g_brSpeed = 0x05,
+				g_allEffect = 0, g_allSpeed = 0x05;
 T_COLOR_PALETTE g_currentPalette = COLOR_RING;
-
+#define RED {0x00,0xFF,0x00,0xFF}
+#define YELLOW {0xFF,0xFF,0x00,0xFF}
+	
 T_PIXEL g_rainbow[7] = {
 		{0x00,0xFF,0x00,0xFF},//red
 		{0x7F,0xFF,0x00,0xFF},//orange
@@ -50,9 +53,6 @@ T_PIXEL Wheel(uint8_t WheelPos) {//ѕалитра типа цветового круга r - g - b -r
   }
   return temp_pix;
 }
-
-
-
 //‘ункци€ выбирает цвета из палитры. ÷вета от 0 до 255
 T_PIXEL ColorFromPalette(T_COLOR_PALETTE palette,uint8_t colorInd){
 	T_PIXEL tempPixel;
@@ -158,14 +158,15 @@ void OneRandomBlink(){
 				   br = IND_MAX_BRIGHT*2 + 1;
 
 	if(0 == br){//€ркость вернулась на максимум, мен€ем индекс и ставим минимум €ркости
-		SetPixBrightness(index,LIN_BRIGH(br));
+		SetPixBrightness(index,INV_LINBRIGH(br));
 		index = (rand()%255)%NUM_OF_LEDS;
 		br = IND_MAX_BRIGHT*2 + 1;
 	}
+	if(br == 16) SetPixColor(index,ColorFromPalette(g_currentPalette,rand()%255),0x00);
 	if(br > 15)
-		SetPixBrightness(index,INV_LINBRIGH(br));
-	else
 		SetPixBrightness(index,LIN_BRIGH(br));
+	else
+		SetPixBrightness(index,INV_LINBRIGH(br));
 	br--;
 
 }
@@ -181,7 +182,7 @@ void UpdateBrightness(){
 void Rotate(){
 	static	uint8_t shift = 0;
 		for(uint8_t i = 0; i < NUM_OF_LEDS; i++){
-			SetPixColor(i,ColorFromPalette(g_currentPalette,i*10 + shift),GetPix(i).br);
+			SetPixColor(i,ColorFromPalette(g_currentPalette,i*10 + shift),GetPixBr(i));
 		}
 		shift++;
 }
@@ -248,20 +249,14 @@ void RandomColor(){
 				MAX_BRIGHT);
 }
 
-void RandomEffect(){
-	g_colorEffect = rand()%4;
-}
+
+
 void UpdateColor(){
 	if(g_colorEffect == 0) ;
 	if(g_colorEffect == 1) Rotate();
 	if(g_colorEffect == 2) StackColor();
 	if(g_colorEffect == 3) RandomColor();
 	if (g_colorEffect == 4)StackComet();
-
-
-
-
-
 }
 
 
@@ -324,4 +319,52 @@ void InitLedColors(){
 		SetPixColor(i,ColorFromPalette(g_currentPalette,i*25),0xFF);
 	}
 
+}
+#define NUM_OF_ALL_EFFECTS 6
+
+#define NON_EFFECT			0
+#define COLOR_WAWE			1
+#define RUN_FIRE			2
+#define RANDOM_SLOW_BLINK	3
+#define STACK_COMET			4
+#define CHET_BLINK			5
+
+void UpdateAll(){
+	switch (g_allEffect)
+	{
+	case NON_EFFECT			:					;break;
+	case COLOR_WAWE			:Rotate()			;break;
+	case RUN_FIRE			:{RunFireBr();	Rotate();}	;break;
+	case RANDOM_SLOW_BLINK	:OneRandomBlink()	;break;
+	case STACK_COMET		:StackComet()		;break;
+	case CHET_BLINK			:{LinUpDownChet();Rotate();}; break;
+	default					:Rotate()			;break;
+	}
+}
+void RandomAllEffect(){
+	g_allEffect = rand()%NUM_OF_ALL_EFFECTS;
+	InitLedColors();
+}
+
+void NextEffect(){
+		g_allEffect++;
+				
+							
+		g_allEffect = g_allEffect%(NUM_OF_ALL_EFFECTS + 1);
+		T_COLOR_PALETTE tempPalette = g_currentPalette;
+		g_currentPalette = NO_COLOR;
+		InitLedColors();
+		if (g_allEffect == NUM_OF_ALL_EFFECTS) {
+			AddTask(RandomAllEffect,0xffff,0xffff);
+			SetPixColor(0,RED,MAX_BRIGHT);
+			}
+			else{
+				DeleteTask(RandomAllEffect);
+				SetPixColor(g_allEffect,YELLOW,MAX_BRIGHT);
+			}
+		g_currentPalette = tempPalette;
+		
+
+		AddTask(InitLedColors,1000,0);
+		AddTask(UpdateAll,1500,10*g_colorSpeed);
 }

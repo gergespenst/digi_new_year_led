@@ -1,7 +1,7 @@
 #include "led_ws2812.h"
 
 
-
+static T_PIXEL temp_pix ;
 static T_PIXEL  out_data_set[NUM_OF_LEDS] ;
 //= {
 			//{.red=0xFF,.green=0x00,.blue=0x00},
@@ -55,7 +55,7 @@ static T_PIXEL  out_data_set[NUM_OF_LEDS] ;
 
 #pragma optimize=z none
 void SendOnePixel(T_PIXEL* pixel){
-	volatile uint16_t x = 0;
+	//volatile uint16_t x = 0;
 	volatile uint8_t out_data;
 	for(uint8_t j = 0; j < 3; j++){
 		out_data = (((uint8_t*)pixel)[j]);
@@ -132,7 +132,7 @@ uint8_t SetPixColor(uint8_t pixnum,T_PIXEL color,uint8_t br){
 
 //#pragma optimize=z none
 void SendAllPixels(){
-	T_PIXEL temp_pix ;
+	
 	 for(uint8_t i = 0; i < NUM_OF_LEDS; i++){
 		 temp_pix.blue = (out_data_set[i].blue * 	out_data_set[i].br) >> 8;
 		 temp_pix.red  = (out_data_set[i].red  * 	out_data_set[i].br) >> 8;
@@ -151,4 +151,8 @@ uint8_t SetPixBrightness(uint8_t pixnum,uint8_t br){
 
 T_PIXEL GetPix(uint8_t pixnum){
 	return out_data_set[pixnum];
+}
+
+uint8_t GetPixBr(uint8_t pixnum){
+	return out_data_set[pixnum].br;
 }
