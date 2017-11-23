@@ -70,16 +70,32 @@ void callbac(uint8_t data){
 	NextBrightnessEffect();
 		break;
 	case KEY2:
-	SetColorEffect(2,5);
+	
 	break;
 	case KEY3:
-	SetColorEffect(3,5);
+	
 	break;
 	
 	}
 }
 void long_press(uint8_t key){
-	NextBrightnessEffect();
+		switch (key)
+		{
+			case KEY0:{
+				NextPalette();
+			}
+			break;
+			case KEY1:
+		
+			break;
+			case KEY2:
+		
+			break;
+			case KEY3:
+		
+			break;
+			
+		}
 }
 
 int main(){

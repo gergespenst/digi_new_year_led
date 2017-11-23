@@ -1,10 +1,10 @@
 #include "led_effects.h"
 
-static uint8_t 	g_colorEffect = 2, g_colorSpeed = 0x05,
+static uint8_t 	g_colorEffect = 0, g_colorSpeed = 0x05,
 				g_brEffect = 0, g_brSpeed = 0x05;
 T_COLOR_PALETTE g_currentPalette = COLOR_RING;
 
-T_PIXEL rainbow[7] = {
+T_PIXEL g_rainbow[7] = {
 		{0x00,0xFF,0x00,0xFF},//red
 		{0x7F,0xFF,0x00,0xFF},//orange
 		{0xFF,0xFF,0x00,0xFF},//yellow
@@ -58,7 +58,7 @@ T_PIXEL ColorFromPalette(T_COLOR_PALETTE palette,uint8_t colorInd){
 	T_PIXEL tempPixel;
 	switch (palette) {
 		case RAINBOW:{
-			tempPixel = rainbow[colorInd%7];
+			tempPixel = g_rainbow[colorInd%7];
 					}break;
 		case COLOR_RING:{
 			tempPixel = Wheel(colorInd);
@@ -101,6 +101,11 @@ T_PIXEL ColorFromPalette(T_COLOR_PALETTE palette,uint8_t colorInd){
 			tempPixel.green = 0xcf;
 			tempPixel.blue = 0x48;
 					}break;
+		case NO_COLOR:{
+			tempPixel.red =		0;
+			tempPixel.green =	0;
+			tempPixel.blue =	0;			
+		}
 		default:
 			break;
 	}
@@ -247,15 +252,18 @@ void RandomEffect(){
 	g_colorEffect = rand()%4;
 }
 void UpdateColor(){
-	if(g_colorEffect == 0) Rotate();
-	if(g_colorEffect == 1) StackColor();
-	if(g_colorEffect == 2) RandomColor();
-	if(g_colorEffect == 3) StackComet();
+	if(g_colorEffect == 0) ;
+	if(g_colorEffect == 1) Rotate();
+	if(g_colorEffect == 2) StackColor();
+	if(g_colorEffect == 3) RandomColor();
+	if (g_colorEffect == 4)StackComet();
+
 
 
 
 
 }
+
 
 
 void SetColorEffect(uint8_t effect,uint8_t speed){
@@ -270,7 +278,13 @@ void NextColorEffect()
 {
 	g_colorEffect++;
 	g_colorEffect = g_colorEffect%NUM_OF_COLOR_EFFECTS;
-	AddTask(UpdateColor,0,10*g_colorSpeed);
+	T_COLOR_PALETTE tempPalette = g_currentPalette;
+	g_currentPalette = NO_COLOR;
+	InitLedColors();
+	SetPixColor(g_colorEffect,g_rainbow[0],MAX_BRIGHT);
+	g_currentPalette = tempPalette;
+	AddTask(InitLedColors,1000,0);
+	AddTask(UpdateColor,1500,10*g_colorSpeed);
 
 }
 
@@ -287,6 +301,22 @@ void NextBrightnessEffect()
 	g_brEffect = g_brEffect%NUM_OF_BR_EFFECTS;
 	AddTask(UpdateBrightness,0,10*g_brSpeed);
 
+}
+
+void NextPalette()
+{
+	switch (g_currentPalette)
+	{
+		case RAINBOW		:g_currentPalette = COLOR_RING	; break;
+		case COLOR_RING		:g_currentPalette = FLAME 		; break;
+		case FLAME 			:g_currentPalette = COLD 		; break;
+		case COLD 			:g_currentPalette = WARM 		; break;
+		case WARM 			:g_currentPalette = COLD_WHITE	; break;
+		case COLD_WHITE 	:g_currentPalette = WARM_WHITE	; break;
+		case WARM_WHITE		:g_currentPalette = RAINBOW		; break;
+		default				:g_currentPalette = COLOR_RING	; break;
+	}
+	InitLedColors();
 }
 
 void InitLedColors(){
