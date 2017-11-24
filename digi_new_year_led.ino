@@ -32,11 +32,34 @@ inline void InitSysTimer(){
 
 }
 
+
+
 ISR(TIM0_OVF_vect){
 	TCNT0=0x00;
 	TimerProcess();	
 }
 
+inline void InitNetSync(){
+	//Первый запуск устанавливаем от спадающего фронта
+	MCUCR = (0 << ISC00) | (1 << ISC01);
+	//Разрешаем INT0
+	GIMSK |= (1 << 6);
+	GIFR  |= (1 << 6);
+	//Настраиваем вход INT0 yf вход
+	DDRB &= ~(1 << PB2);
+	PORTB |= (1 << PB2);
+}
+
+inline void InitPWMTimer(){
+	//TCCR1 = (1 << CS13) | (0 << CS12) | (1 << CS11) | (1 << CS10);
+	TCCR1 = 0;
+	GTCCR = 0;
+	TCNT1 = 0;
+	OCR1A = 0 ;
+	OCR1B = 0;
+	OCR1C = 0;
+	TIMSK |=  (1 << OCIE1A);
+}
 
 void InitBlink(){
 		
@@ -46,10 +69,33 @@ void InitBlink(){
 
 
 void Blink(){
-		PORTB ^= 1<< PB1;
+		//PORTB ^= 1<< PB1;
 
 }
 
+static uint8_t period = 0xFF;
+
+ISR(TIM1_COMPA_vect){
+	PORTB ^= 1<< PB1;
+}
+
+ISR(INT0_vect){
+	//после первого же срабатывания переключаемся на срабатывание по обоим фронтам
+	// сделано для того чтоб мерять длительность между нулями	
+	MCUCR = (1 << ISC00) | (0 << ISC01);
+	if (TCCR1 & 0x0F)
+	{
+		period = TCNT1;
+		TCCR1 &= ~0x0F;
+		TCNT1 = 0;
+	}else
+	{
+		TCCR1 = (1 << CS13) | (0 << CS12) | (1 << CS11) | (1 << CS10);
+		OCR1A = period>>2;
+		
+	}
+	//PORTB ^= 1<< PB1;	
+}
 
 
 
@@ -99,6 +145,8 @@ __ATTR_NORETURN__ int main(){
 	InitSysTimer();	
 	InitWS2110();
 	InitAdcKeyboard(callbac,long_press);
+	InitNetSync();
+	InitPWMTimer();
 	sei();
 	
 	AddTask(Blink,0,1000);
