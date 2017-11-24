@@ -102,8 +102,7 @@ __ATTR_NORETURN__ int main(){
 	sei();
 	
 	AddTask(Blink,0,1000);
-	AddTask(UpdateAll,0,0x50);
-	AddTask(SendAllPixels,0,10);
+
 	AddTask(ScanKayboard,0,100);
 	while (1)
 	{
