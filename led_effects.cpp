@@ -338,14 +338,21 @@ void InitLedColors(){
 void UpdateAll(){
 	switch (g_allEffect & ~EFFECT_MASK)
 	{
-	case NON_EFFECT			:					;break;
-	case COLOR_WAWE			:Rotate()			;break;
-	case RUN_FIRE			:{RunFireBr();	Rotate();}	;break;
-	case RANDOM_SLOW_BLINK	:OneRandomBlink()	;break;
-	case STACK_COMET		:StackComet()		;break;
-	case CHET_BLINK			:{LinUpDownChet();Rotate();}; break;
-	default					:Rotate()			;break;
+	case NON_EFFECT			:											;break;
+	case COLOR_WAWE			:{	Rotate()	;
+								g_allSpeed = 3;}						;break;
+	case RUN_FIRE			:{	RunFireBr();	Rotate();
+								g_allSpeed = 60;}						;break;
+	case RANDOM_SLOW_BLINK	:{	OneRandomBlink();
+								g_allSpeed = 80;}						;break;
+	case STACK_COMET		:{	StackComet()	;
+								g_allSpeed = 50;}						;break;
+	case CHET_BLINK			:{	LinUpDownChet();Rotate();
+								g_allSpeed = 50;}						;break;
+	default					:{	Rotate()	;
+								g_allSpeed = 7;}						;break;
 	}
+	AddTask(UpdateAll,0,g_allSpeed);
 }
 
 void RandomAllEffect(){
@@ -376,7 +383,7 @@ void NextEffect(){
 			}
 		eeprom_update_byte(&g_eepromAllEffect,g_allEffect);
 		AddTask(InitLedColors,1000,0);
-		AddTask(UpdateAll,1500,10*g_allSpeed);
+		AddTask(UpdateAll,1500,0);
 }
 
 void InitWS2110(){
@@ -385,6 +392,6 @@ void InitWS2110(){
 	g_allEffect = eeprom_read_byte(&g_eepromAllEffect);
 	AddTask(RandomAllEffect,0,0xffff);
 	AddTask(SendAllPixels,0,10);
-	AddTask(UpdateAll,0,10*g_allSpeed);
+	AddTask(UpdateAll,10,0);
 	
 }
