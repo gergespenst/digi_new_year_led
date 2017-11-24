@@ -58,7 +58,7 @@ inline void InitPWMTimer(){
 	OCR1A = 0 ;
 	OCR1B = 0;
 	OCR1C = 0;
-	TIMSK |=  (1 << OCIE1A);
+	TIMSK |=  (1 << OCIE1A)| (1 << TOIE1) | (1 << OCIE1B);
 }
 
 void InitBlink(){
@@ -79,11 +79,20 @@ ISR(TIM1_COMPA_vect){
 	PORTB ^= 1<< PB1;
 }
 
+ISR(TIM1_COMPB_vect){
+	PORTB ^= 1<< PB1;
+}
+
+ISR(TIM1_OVF_vect){
+	TCCR1 &= ~0x0F;
+	TCNT1 = 0;
+}
+
 ISR(INT0_vect){
 	//после первого же срабатывания переключаемся на срабатывание по обоим фронтам
 	// сделано для того чтоб мерять длительность между нулями	
 	MCUCR = (1 << ISC00) | (0 << ISC01);
-	if (TCCR1 & 0x0F)
+	if ((TCCR1 & 0x0F) && (TCNT1 > (period >> 4)))
 	{
 		period = TCNT1;
 		TCCR1 &= ~0x0F;
@@ -91,7 +100,8 @@ ISR(INT0_vect){
 	}else
 	{
 		TCCR1 = (1 << CS13) | (0 << CS12) | (1 << CS11) | (1 << CS10);
-		OCR1A = period>>2;
+		OCR1A = period >> 2;
+		OCR1B = OCR1A + period >> 6 ;
 		
 	}
 	//PORTB ^= 1<< PB1;	
