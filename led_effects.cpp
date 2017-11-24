@@ -5,6 +5,7 @@ static uint8_t 	g_colorEffect = 0, g_colorSpeed = 0x05,
 				g_allEffect = 0, g_allSpeed = 0x05;
 T_COLOR_PALETTE g_currentPalette = COLOR_RING;
 EEMEM T_COLOR_PALETTE g_eepromPalette = COLOR_RING;
+EEMEM uint8_t g_eepromAllEffect = 0;
 #define RED {0x00,0xFF,0x00,0xFF}
 #define YELLOW {0xFF,0xFF,0x00,0xFF}
 #define BLACK{0x00,0x00,0x00,0x00}
@@ -326,7 +327,7 @@ void InitLedColors(){
 
 }
 #define NUM_OF_ALL_EFFECTS 6
-
+#define EFFECT_MASK			0x80
 #define NON_EFFECT			0
 #define COLOR_WAWE			1
 #define RUN_FIRE			2
@@ -335,7 +336,7 @@ void InitLedColors(){
 #define CHET_BLINK			5
 
 void UpdateAll(){
-	switch (g_allEffect)
+	switch (g_allEffect & ~EFFECT_MASK)
 	{
 	case NON_EFFECT			:					;break;
 	case COLOR_WAWE			:Rotate()			;break;
@@ -348,24 +349,40 @@ void UpdateAll(){
 }
 
 void RandomAllEffect(){
-	g_allEffect = rand()%NUM_OF_ALL_EFFECTS;
+	if (g_allEffect & EFFECT_MASK)
+	{
+		g_allEffect = rand()%NUM_OF_ALL_EFFECTS;
+		g_allEffect |= EFFECT_MASK;
+	}
+	
 	InitLedColors();
 }
 
 void NextEffect(){
 		g_allEffect++;						
-		g_allEffect = g_allEffect%(NUM_OF_ALL_EFFECTS + 1);
+		g_allEffect = (g_allEffect & ~EFFECT_MASK) %(NUM_OF_ALL_EFFECTS + 1);
 		for(uint8_t i = 0; i < NUM_OF_LEDS; i++){
 				SetPixColor(i,BLACK,0);
 			}
-		if (g_allEffect == NUM_OF_ALL_EFFECTS) {
-			AddTask(RandomAllEffect,0xffff,0xffff);
+		if( (g_allEffect & ~EFFECT_MASK) == NUM_OF_ALL_EFFECTS) {
+			g_allEffect |= EFFECT_MASK;
+			//AddTask(RandomAllEffect,0xffff,0xffff);
 			SetPixColor(0,RED,MAX_BRIGHT);
 			}
 			else{
-				DeleteTask(RandomAllEffect);
+				g_allEffect &= ~EFFECT_MASK;
+				//DeleteTask(RandomAllEffect);
 				SetPixColor(g_allEffect,YELLOW,MAX_BRIGHT);
 			}
+		eeprom_update_byte(&g_eepromAllEffect,g_allEffect);
 		AddTask(InitLedColors,1000,0);
 		AddTask(UpdateAll,1500,10*g_allSpeed);
+}
+
+void InitWS2110(){
+	INIT_LED_GPIO();
+	InitLedColors();
+	g_allEffect = eeprom_read_byte(&g_eepromAllEffect);
+	AddTask(RandomAllEffect,0,0xffff);
+	
 }

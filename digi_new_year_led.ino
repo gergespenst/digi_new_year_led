@@ -52,12 +52,7 @@ void Blink(){
 
 
 
-#pragma inline=forced
-inline static void InitWS2110(){
-	INIT_LED_GPIO();
-	InitLedColors();
-	AddTask(RandomAllEffect,0,0xffff);
-}
+
 
 void callbac(uint8_t data){
 	switch (data)
