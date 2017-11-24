@@ -4,10 +4,12 @@ static uint8_t 	g_colorEffect = 0, g_colorSpeed = 0x05,
 				g_brEffect = 0, g_brSpeed = 0x05,
 				g_allEffect = 0, g_allSpeed = 0x05;
 T_COLOR_PALETTE g_currentPalette = COLOR_RING;
+EEMEM T_COLOR_PALETTE g_eepromPalette = COLOR_RING;
 #define RED {0x00,0xFF,0x00,0xFF}
 #define YELLOW {0xFF,0xFF,0x00,0xFF}
+#define BLACK{0x00,0x00,0x00,0x00}
 	
-T_PIXEL g_rainbow[7] = {
+PROGMEM const T_PIXEL g_rainbow[7] = {
 		{0x00,0xFF,0x00,0xFF},//red
 		{0x7F,0xFF,0x00,0xFF},//orange
 		{0xFF,0xFF,0x00,0xFF},//yellow
@@ -58,7 +60,8 @@ T_PIXEL ColorFromPalette(T_COLOR_PALETTE palette,uint8_t colorInd){
 	T_PIXEL tempPixel;
 	switch (palette) {
 		case RAINBOW:{
-			tempPixel = g_rainbow[colorInd%7];
+			memcpy_P((void*)&tempPixel,(const void*)&(g_rainbow[colorInd/36]),sizeof(T_PIXEL));
+		//	tempPixel = g_rainbow[colorInd%7];
 					}break;
 		case COLOR_RING:{
 			tempPixel = Wheel(colorInd);
@@ -137,7 +140,7 @@ void LinUpDownChet(){
 		if(duty == 0) sign = FALSE;
 }
 
-#define FIRE_LENGT 5
+#define FIRE_LENGT NUM_OF_LEDS
 void RunFireBr(){
 	static uint8_t indOfFire = 0;
 
@@ -182,7 +185,7 @@ void UpdateBrightness(){
 void Rotate(){
 	static	uint8_t shift = 0;
 		for(uint8_t i = 0; i < NUM_OF_LEDS; i++){
-			SetPixColor(i,ColorFromPalette(g_currentPalette,i*10 + shift),GetPixBr(i));
+			SetPixColor(i,ColorFromPalette(g_currentPalette,i*255/NUM_OF_LEDS + shift),GetPixBr(i));
 		}
 		shift++;
 }
@@ -276,7 +279,7 @@ void NextColorEffect()
 	T_COLOR_PALETTE tempPalette = g_currentPalette;
 	g_currentPalette = NO_COLOR;
 	InitLedColors();
-	SetPixColor(g_colorEffect,g_rainbow[0],MAX_BRIGHT);
+	SetPixColor(g_colorEffect,RED,MAX_BRIGHT);
 	g_currentPalette = tempPalette;
 	AddTask(InitLedColors,1000,0);
 	AddTask(UpdateColor,1500,10*g_colorSpeed);
@@ -311,12 +314,14 @@ void NextPalette()
 		case WARM_WHITE		:g_currentPalette = RAINBOW		; break;
 		default				:g_currentPalette = COLOR_RING	; break;
 	}
+	eeprom_update_byte((uint8_t*)&g_eepromPalette,(uint8_t)g_currentPalette);
 	InitLedColors();
 }
 
 void InitLedColors(){
+	g_currentPalette = (T_COLOR_PALETTE)eeprom_read_byte((const uint8_t*)&g_eepromPalette);
 	for(uint8_t i = 0; i < NUM_OF_LEDS; i++){
-		SetPixColor(i,ColorFromPalette(g_currentPalette,i*25),0xFF);
+		SetPixColor(i,ColorFromPalette(g_currentPalette,i*255/NUM_OF_LEDS),0xFF);
 	}
 
 }
@@ -341,19 +346,18 @@ void UpdateAll(){
 	default					:Rotate()			;break;
 	}
 }
+
 void RandomAllEffect(){
 	g_allEffect = rand()%NUM_OF_ALL_EFFECTS;
 	InitLedColors();
 }
 
 void NextEffect(){
-		g_allEffect++;
-				
-							
+		g_allEffect++;						
 		g_allEffect = g_allEffect%(NUM_OF_ALL_EFFECTS + 1);
-		T_COLOR_PALETTE tempPalette = g_currentPalette;
-		g_currentPalette = NO_COLOR;
-		InitLedColors();
+		for(uint8_t i = 0; i < NUM_OF_LEDS; i++){
+				SetPixColor(i,BLACK,0);
+			}
 		if (g_allEffect == NUM_OF_ALL_EFFECTS) {
 			AddTask(RandomAllEffect,0xffff,0xffff);
 			SetPixColor(0,RED,MAX_BRIGHT);
@@ -362,9 +366,6 @@ void NextEffect(){
 				DeleteTask(RandomAllEffect);
 				SetPixColor(g_allEffect,YELLOW,MAX_BRIGHT);
 			}
-		g_currentPalette = tempPalette;
-		
-
 		AddTask(InitLedColors,1000,0);
-		AddTask(UpdateAll,1500,10*g_colorSpeed);
+		AddTask(UpdateAll,1500,10*g_allSpeed);
 }

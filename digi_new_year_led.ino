@@ -43,8 +43,7 @@ void InitBlink(){
 		DDRB |= 1<<PB1;
 		PORTB |= 1<<PB1;
 }
-T_PIXEL tempPix = {0,0x00,0xff,0x00};
-	
+
 
 void Blink(){
 		PORTB ^= 1<< PB1;
@@ -57,6 +56,7 @@ void Blink(){
 inline static void InitWS2110(){
 	INIT_LED_GPIO();
 	InitLedColors();
+	AddTask(RandomAllEffect,0,0xffff);
 }
 
 void callbac(uint8_t data){

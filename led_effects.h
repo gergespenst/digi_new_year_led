@@ -10,6 +10,8 @@
 #define __LED_EFFECTS_H__
 #include "led_ws2812.h"
 #include "task_query.h"
+#include "avr/pgmspace.h"
+#include "avr/eeprom.h"
 #include <stdlib.h>
 #define NUM_OF_COLOR_EFFECTS 5
 #define NUM_OF_BR_EFFECTS 4
@@ -21,6 +23,7 @@ void NextBrightnessEffect();
 void NextPalette();
 void InitLedColors();
 void UpdateAll();
+void RandomAllEffect();
 void NextEffect();
 void SetColorEffect(uint8_t effect,uint8_t speed);
 void NextColorEffect();
