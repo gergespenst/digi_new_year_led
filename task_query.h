@@ -37,7 +37,7 @@ extern void Idle();
 typedef  struct {
 	TPTR task;
 	unsigned int start_delay;
-	unsigned int  period;
+	unsigned int  g_netPeriod;
 	char run:4;//флаг на запуск задачи в функции Dispatcher
 	char real_time:4;//флаг на запуск задачи в обработчике прерывания от таймера дял задач real time
 	} TTask;

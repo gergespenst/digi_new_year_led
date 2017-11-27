@@ -20,7 +20,7 @@ void AddTask(TPTR AddingTask, unsigned int  delay, unsigned int  period){
 		if (TaskQueue[i].task == AddingTask )
 		{
 			ATOMIC_BLOCK(ATOMIC_RESTORESTATE){
-			TaskQueue[i].period = period;
+			TaskQueue[i].g_netPeriod = period;
 			TaskQueue[i].start_delay = delay;
 			TaskQueue[i].run = 0;
 			TaskQueue[i].real_time = 0;
@@ -35,7 +35,7 @@ void AddTask(TPTR AddingTask, unsigned int  delay, unsigned int  period){
 			TaskQueue[QueueTail].task = AddingTask;
 			TaskQueue[QueueTail].run = 0;
 			TaskQueue[QueueTail].real_time = 0;
-			TaskQueue[QueueTail].period = period;
+			TaskQueue[QueueTail].g_netPeriod = period;
 			TaskQueue[QueueTail].start_delay = delay;
 			QueueTail++;
 		}
@@ -52,7 +52,7 @@ void AddRealTimeTask( TPTR AddingTask, unsigned int delay, unsigned int period )
 			if (TaskQueue[i].task == AddingTask )
 			{
 				ATOMIC_BLOCK(ATOMIC_RESTORESTATE){
-					TaskQueue[i].period = period;
+					TaskQueue[i].g_netPeriod = period;
 					TaskQueue[i].start_delay = delay;
 					TaskQueue[i].run = 0;
 					TaskQueue[i].real_time = 1;
@@ -67,7 +67,7 @@ void AddRealTimeTask( TPTR AddingTask, unsigned int delay, unsigned int period )
 				TaskQueue[QueueTail].task = AddingTask;
 				TaskQueue[QueueTail].run = 0;
 				TaskQueue[QueueTail].real_time = 1;
-				TaskQueue[QueueTail].period = period;
+				TaskQueue[QueueTail].g_netPeriod = period;
 				TaskQueue[QueueTail].start_delay = delay;
 				QueueTail++;
 			}
@@ -85,7 +85,7 @@ void DeleteTask(TPTR delTask){
 				{
 					TaskQueue[i].task = TaskQueue[QueueTail - 1].task;
 					TaskQueue[i].start_delay = TaskQueue[QueueTail - 1].start_delay;
-					TaskQueue[i].period = TaskQueue[QueueTail - 1].period;
+					TaskQueue[i].g_netPeriod = TaskQueue[QueueTail - 1].g_netPeriod;
 					TaskQueue[i].run = TaskQueue[QueueTail - 1].run;
 					TaskQueue[i].real_time = TaskQueue[QueueTail - 1].real_time;
 				}
@@ -104,7 +104,7 @@ void Dispatcher()
 		if ( (tempTask->run == 1) && (tempTask->real_time == 0))
 		{
 			(*(tempTask->task))();
-			if (tempTask->period == 0)
+			if (tempTask->g_netPeriod == 0)
 			{
 				DeleteTask(tempTask->task);
 			}else
@@ -112,7 +112,7 @@ void Dispatcher()
 				tempTask->run = 0;
 				if (!tempTask->start_delay)
 				{
-					tempTask->start_delay = tempTask->period - 1;
+					tempTask->start_delay = tempTask->g_netPeriod - 1;
 				}
 			}
 			
@@ -133,7 +133,7 @@ void TimerProcess()
 				(*(TaskQueue[i].task))();
 
 
-				if (TaskQueue[i].period == 0)
+				if (TaskQueue[i].g_netPeriod == 0)
 				{
 					DeleteTask(TaskQueue[i].task);
 				}else
@@ -141,7 +141,7 @@ void TimerProcess()
 					TaskQueue[i].run = 0;
 					if (!TaskQueue[i].start_delay)
 					{
-						TaskQueue[i].start_delay = TaskQueue[i].period - 1;
+						TaskQueue[i].start_delay = TaskQueue[i].g_netPeriod - 1;
 					}
 				}
 			}
