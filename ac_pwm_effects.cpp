@@ -25,15 +25,18 @@ uint8_t linBr0[16] = {	15,60,80,100,		//Числа для микроламп
 	#define FALSE 0
 #endif
 
-static uint8_t duty = 1,sign,g_acPwmSpeed = 100,g_acPwmMode = 2;
+static uint8_t  duty = 1,sign,
+				g_acPwmSpeed = 100,g_acPwmMode = 2;
+
 EEMEM uint8_t g_eeprom_acPwmMode = 0;
-#define NUM_OF_AC_EFFECTS 6
+#define NUM_OF_AC_EFFECTS 7
 #define NO_EFFECT			0
 #define UPDOWNSYNC			1
 #define UPDOWNANTISYNC		2
 #define WAWE				3
 #define FAST_UPDOWNSYNC		4
 #define FAST_UPDOWNANTISYNC 5
+#define SERIAL_UP_DOWN		6
 
 void LinUpDownACSynphase(){	
 	SetACPWMDuty(LIN_AC_BRIGH(duty),LIN_AC_BRIGH(duty));	
@@ -57,8 +60,19 @@ void WaweAC(){
 	}else{
 		SetACPWMDuty(MIN_AC_BRIGH,MAX_AC_BRIGH);
 		sign = TRUE;
-	}
-	
+	}	
+}
+
+void SerialUpDownAC(){//Плавно разгорается и тухнет один цвет, после него плавно разгорается и тухнет другой
+	if(sign & 0x80)	SetACPWMDuty(MIN_AC_BRIGH,LIN_AC_BRIGH(duty));
+		else SetACPWMDuty(LIN_AC_BRIGH(duty),MIN_AC_BRIGH);
+		
+		(sign & 0x0F)?(duty = duty - 1):( duty = duty + 1);
+		if(duty >= 15) sign = (sign & 0xF0) | TRUE;
+		if(duty == 0) {
+			sign =  (sign & 0xF0) | FALSE;
+			sign ^= 0x80;
+			};
 }
 
 void UpdateACPwm(){
@@ -92,6 +106,10 @@ void UpdateACPwm(){
 	case FAST_UPDOWNANTISYNC:{
 		LinUpDownACAntiphase();
 		g_acPwmSpeed = 25;
+		}break;
+	case SERIAL_UP_DOWN:{
+		SerialUpDownAC();
+		g_acPwmSpeed = 100;
 		}break;
 	}
 	AddTask(UpdateACPwm,0,g_acPwmSpeed);
