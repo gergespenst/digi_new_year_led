@@ -7,7 +7,7 @@
  * --- PB1 - PWM1
  * --- PB2 - INT0
  * --- PB3 - WS2812
- * --- PB4 - PWM2
+ * --- PB4 - ----
  * --- PB5 - ADC_Keyboard
  */ 
 #include "task_query.h"
@@ -15,6 +15,7 @@
 #include "led_effects.h"
 #include "adc_keyboard.h"
 #include "ac_pwm.h"
+#include "ac_pwm_effects.h"
 #include <avr/io.h>
 #include <avr/interrupt.h>
 
@@ -56,15 +57,12 @@ void InitBlink(){
 
 
 void Blink(){
-		//PORTB ^= 1<< PB1;
+	//	PORTB ^= 1<< PB1;
 
 }
 
-void UpdatePwm(){
-	static uint8_t pwm = 0;
-	SetACPWMPeriod(pwm,pwm/2);
-	pwm++;
-}
+
+
 
 void callbac(uint8_t data){
 	switch (data)
@@ -74,7 +72,9 @@ void callbac(uint8_t data){
 	}
 		break;
 	case KEY1:
-	
+		{
+			NextACEffect();
+}
 		break;
 	case KEY2:
 	
@@ -92,8 +92,9 @@ void long_press(uint8_t key){
 				NextPalette();
 			}
 			break;
-			case KEY1:
-		
+			case KEY1:{
+				ToggleACRandomEffects();
+			}
 			break;
 			case KEY2:
 		
@@ -111,13 +112,14 @@ __ATTR_NORETURN__ int main(){
 	InitSysTimer();	
 	InitWS2110();
 	InitAdcKeyboard(callbac,long_press);
-	InitACPWM();
+	InitACEffects();
 	sei();
-	SetACPWMPeriod(0x7f,0x12);
-	AddTask(Blink,0,1000);
+	
+	
 
 	AddTask(ScanKayboard,0,100);
-	AddTask(UpdatePwm,0,200);
+	
+	
 	while (1)
 	{
 		Dispatcher();

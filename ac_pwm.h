@@ -24,7 +24,6 @@
 
 
 void InitACPWM();
-
-void SetACPWMPeriod(uint8_t pwm0_per,uint8_t pwm1_per);
+void SetACPWMDuty(uint8_t pwm0_per,uint8_t pwm1_per);
 
 #endif //__AC_PWM_H__

@@ -9,7 +9,7 @@
 #ifndef __TASK_QUERY_H__
 #define __TASK_QUERY_H__
 #define AVR
-#define MAX_TASKS 10
+#define MAX_TASKS 15
 
 #ifdef STM8
 	#include "stm8s_itc.h"

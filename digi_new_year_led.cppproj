@@ -537,6 +537,12 @@ vmresolved.tools.path=C:\Users\USER\AppData\Local\arduino15\packages\arduino\too
     </VisualMicroSettings>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="ac_pwm.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="ac_pwm.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="adc_keyboard.cpp">
       <SubType>compile</SubType>
     </Compile>

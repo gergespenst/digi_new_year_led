@@ -35,7 +35,7 @@ void InitACPWM(){
 	TIMSK |=  (1 << OCIE1A)| (1 << TOIE1) | (1 << OCIE1B) ;
 }
 
-void SetACPWMPeriod(uint8_t pwm0_per,uint8_t pwm1_per){
+void SetACPWMDuty(uint8_t pwm0_per,uint8_t pwm1_per){
 	g_pwmPeriod[0] = pwm0_per;
 	g_pwmPeriod[1] = pwm1_per;
 }
@@ -50,6 +50,7 @@ ISR(TIM1_COMPA_vect){
 
 ISR(TIM1_COMPB_vect){
 	PWM_PORT |= (1<< PWM1_PIN);
+	
 }
 
 
