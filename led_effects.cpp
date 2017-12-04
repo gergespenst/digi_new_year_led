@@ -391,7 +391,7 @@ void InitWS2110(){
 	InitLedColors();
 	g_allEffect = eeprom_read_byte(&g_eepromAllEffect);
 	AddTask(RandomAllEffect,0,0xffff);
-	AddTask(SendAllPixels,0,10);
+	AddRealTimeTask(SendAllPixels,0,10);
 	AddTask(UpdateAll,10,0);
 	
 }
