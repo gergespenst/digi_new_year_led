@@ -130,8 +130,9 @@ void TimerProcess()
 			{
 				//ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
 						{
+				
 				(*(TaskQueue[i].task))();
-
+				
 
 				if (TaskQueue[i].g_netPeriod == 0)
 				{

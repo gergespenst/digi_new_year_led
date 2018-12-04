@@ -26,6 +26,7 @@ void UpdateAll();
 void RandomAllEffect();
 void NextEffect();
 void InitWS2110();
+void InitTestWS2110();
 void SetColorEffect(uint8_t effect,uint8_t speed);
 void NextColorEffect();
 void UpdateBrightness();

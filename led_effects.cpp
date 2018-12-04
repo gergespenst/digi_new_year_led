@@ -320,7 +320,7 @@ void NextPalette()
 }
 
 void InitLedColors(){
-	g_currentPalette = (T_COLOR_PALETTE)eeprom_read_byte((const uint8_t*)&g_eepromPalette);
+	
 	for(uint8_t i = 0; i < NUM_OF_LEDS; i++){
 		SetPixColor(i,ColorFromPalette(g_currentPalette,i*255/NUM_OF_LEDS),0xFF);
 	}
@@ -388,10 +388,24 @@ void NextEffect(){
 
 void InitWS2110(){
 	INIT_LED_GPIO();
-	InitLedColors();
+	
 	g_allEffect = eeprom_read_byte(&g_eepromAllEffect);
+	g_currentPalette = (T_COLOR_PALETTE)eeprom_read_byte((const uint8_t*)&g_eepromPalette);
+	
+	InitLedColors();
+	
 	AddTask(RandomAllEffect,0,0xffff);
 	AddRealTimeTask(SendAllPixels,0,10);
 	AddTask(UpdateAll,10,0);
+	
+}
+
+void InitTestWS2110(){
+	INIT_LED_GPIO();
+	g_allEffect = COLOR_WAWE;//NON_EFFECT;
+	g_currentPalette = RAINBOW;
+	InitLedColors();
+		AddRealTimeTask(SendAllPixels,0,10);
+		AddTask(UpdateAll,10,0);
 	
 }

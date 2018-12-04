@@ -18,9 +18,10 @@
 #include "ac_pwm_effects.h"
 #include <avr/io.h>
 #include <avr/interrupt.h>
+#include <avr/delay.h>
 
 inline void InitSysTimer(){
-	//Системнй таймер с переполнением раз в 1 мс
+	//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ 1 пїЅпїЅ
 	PLLCSR=0x00;
 	// Timer/Counter 0 initialization
 	// Clock source: System Clock
@@ -111,12 +112,11 @@ __ATTR_NORETURN__ int main(){
 	InitBlink();
 	InitSysTimer();	
 	InitWS2110();
+	//InitTestWS2110();
 	InitAdcKeyboard(callbac,long_press);
 	InitACEffects();
-	sei();
-	
-	
 
+	sei();
 	AddTask(ScanKayboard,0,100);
 	
 	

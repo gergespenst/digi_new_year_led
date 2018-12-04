@@ -30,11 +30,14 @@
  #include <stdint.h>
  #include <avr/io.h>
 
- #define NUM_OF_LEDS 20
+ #define NUM_OF_LEDS 30
  #define LED_GPIO_PORT PORTB
  #define LED_GPIO_DIR  DDRB
  #define LED_GPIO_NUM_PIN PB3
  #define LED_GPIO_PIN  (1 << LED_GPIO_NUM_PIN)
+ 
+ //LED TYPE
+ #define P9823
  
  #define INIT_LED_GPIO() LED_GPIO_DIR |= LED_GPIO_PIN;\
 						 LED_GPIO_PORT &= ~LED_GPIO_PIN;
