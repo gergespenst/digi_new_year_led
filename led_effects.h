@@ -34,6 +34,8 @@ void RandomColor();
 void UpdateColor();
 
 
+
+
 T_PIXEL ColorFromPalette(T_COLOR_PALETTE palette,uint8_t colorInd);
 
 #endif

@@ -128,7 +128,7 @@ uint8_t SetPixColor(uint8_t pixnum,T_PIXEL color,uint8_t br){
 	out_data_set[pixnum].red = 		(color.red );
 	out_data_set[pixnum].green = 	(color.green );
 	out_data_set[pixnum].blue = 	(color.blue);
-	out_data_set[pixnum].white = 	(color.white)<<4;
+	out_data_set[pixnum].white = 	(color.white);
 	out_data_set[pixnum].br = br;
 
 
@@ -142,7 +142,7 @@ void SendAllPixels(){
 		 temp_pix[i].blue = (out_data_set[i].blue	 * 	out_data_set[i].br) >> 8;
 		 temp_pix[i].red  = (out_data_set[i].red	 * 	out_data_set[i].br) >> 8;
 		 temp_pix[i].green = (out_data_set[i].green * out_data_set[i].br) >> 8;
-		 temp_pix[i].white = ((out_data_set[i].white>>4) * out_data_set[i].br) >> 4;
+		 temp_pix[i].white = ((out_data_set[i].white) * out_data_set[i].br) >> 8;
 	 }
 	 //отправляем пиксели
 	 for(uint8_t i = 0; i < NUM_OF_LEDS; i++) SendOnePixel(&(temp_pix[i]));

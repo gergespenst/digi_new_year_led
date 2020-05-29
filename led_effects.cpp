@@ -409,3 +409,11 @@ void InitTestWS2110(){
 		AddTask(UpdateAll,10,0);
 	
 }
+void InitTestSK6812(){
+	INIT_LED_GPIO();
+	g_allEffect = NON_EFFECT;
+	g_currentPalette = RAINBOW;
+	InitLedColors();
+			AddRealTimeTask(SendAllPixels,0,10);
+			AddTask(UpdateAll,10,0);
+}

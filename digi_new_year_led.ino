@@ -114,13 +114,17 @@ __ATTR_NORETURN__ int main(){
 	InitSysTimer();	
 	InitWS2110();
 	//InitTestWS2110();
-	InitAdcKeyboard(callbac,long_press);
-	InitACEffects();
+	//InitAdcKeyboard(callbac,long_press);
+	//InitACEffects();
 
 	sei();
-	AddTask(ScanKayboard,0,100);
-	
-	
+	//AddTask(ScanKayboard,0,100);
+	SetPixelColor(0,255,0,0,0,255);
+	SetPixelColor(0,0,255,0,0,255);
+	SetPixelColor(0,0,0,255,0,255);
+	SetPixelColor(0,0,0,0,255,255);
+	SetPixelColor(0,255,255,255,0,255);
+	SendAllPixels();
 	while (1)
 	{
 		Dispatcher();

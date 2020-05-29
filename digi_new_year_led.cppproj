@@ -27,16 +27,16 @@
     <BootSegment>0</BootSegment>
     <ExternalProgrammingToolCommand />
     <AsfFrameworkConfig>
-      <framework-data xmlns="">
-        <options />
-        <configurations />
-        <files />
-        <documentation help="" />
-        <offline-documentation help="" />
-        <dependencies>
-          <content-extension eid="atmel.asf" uuidref="Atmel.ASF" version="3.27.3" />
-        </dependencies>
-      </framework-data>
+      <framework-data>
+  <options />
+  <configurations />
+  <files />
+  <documentation help="" />
+  <offline-documentation help="" />
+  <dependencies>
+    <content-extension eid="atmel.asf" uuidref="Atmel.ASF" version="3.39.0" />
+  </dependencies>
+</framework-data>
     </AsfFrameworkConfig>
     <preserveEEPROM>true</preserveEEPROM>
     <ResetRule>0</ResetRule>
@@ -46,7 +46,7 @@
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
     <ToolchainSettings>
       <AvrGccCpp>
-  <avrgcc.common.Device>-mmcu=attiny85 -B "%24(PackRepoDir)\atmel\ATtiny_DFP\1.3.147\gcc\dev\attiny85"</avrgcc.common.Device>
+  <avrgcc.common.Device>-mmcu=attiny85 -B "%24(PackRepoDir)\atmel\ATtiny_DFP\1.3.229\gcc\dev\attiny85"</avrgcc.common.Device>
   <avrgcc.common.outputfiles.hex>True</avrgcc.common.outputfiles.hex>
   <avrgcc.common.outputfiles.lss>True</avrgcc.common.outputfiles.lss>
   <avrgcc.common.outputfiles.eep>True</avrgcc.common.outputfiles.eep>
@@ -58,7 +58,7 @@
     <ListValues>
       <Value>__AVR_ATtiny85__</Value>
       <Value>__AVR_ATTINY85__</Value>
-      <Value>ARDUINO=10801</Value>
+      <Value>ARDUINO=108010</Value>
       <Value>ARDUINO_MAIN</Value>
       <Value>F_CPU=16500000L</Value>
       <Value>__AVR__</Value>
@@ -69,16 +69,15 @@
   <avrgcc.compiler.directories.IncludePaths>
     <ListValues>
       <Value>../../../digi_new_year_led</Value>
-      <Value>C:/Program Files (x86)/Atmel/Studio/7.0/Extensions/szza0s0v.md3/Micro Platforms/visualmicro/ide-atmel/libraries</Value>
-      <Value>C:/Users/USER/AppData/Local/arduino15/packages/digistump/hardware/avr/1.6.7/libraries</Value>
-      <Value>C:/Users/USER/Documents/Arduino/libraries</Value>
       <Value>C:/Users/USER/AppData/Local/arduino15/packages/digistump/hardware/avr/1.6.7/cores/tiny</Value>
       <Value>C:/Users/USER/AppData/Local/arduino15/packages/digistump/hardware/avr/1.6.7/variants/digispark</Value>
-      <Value>C:/Users/USER/AppData/Local/arduino15/packages/arduino/tools/avr-gcc/4.8.1-arduino5/avr/include/</Value>
-      <Value>C:/Users/USER/AppData/Local/arduino15/packages/arduino/tools/avr-gcc/4.8.1-arduino5/avr/include/avr/</Value>
-      <Value>C:/Users/USER/AppData/Local/arduino15/packages/arduino/tools/avr-gcc/4.8.1-arduino5/lib/gcc/avr/4.8.1/include</Value>
+      <Value>C:/Users/USER/AppData/Local/arduino15/packages/arduino/tools/avr-gcc/4.8.1-arduino5//lib/gcc/avr/7.3.0/include</Value>
+      <Value>C:/Users/USER/AppData/Local/arduino15/packages/arduino/tools/avr-gcc/4.8.1-arduino5/avr/include</Value>
+      <Value>C:/Users/USER/AppData/Local/arduino15/packages/arduino/tools/avr-gcc/4.8.1-arduino5/avr/include-fixed</Value>
+      <Value>C:/Users/USER/AppData/Local/arduino15/packages/arduino/tools/avr-gcc/4.8.1-arduino5/avr/include/avr</Value>
       <Value>C:/Users/USER/AppData/Local/arduino15/packages/arduino/tools/avr-gcc/4.8.1-arduino5/lib/gcc/avr/4.9.2/include</Value>
       <Value>C:/Users/USER/AppData/Local/arduino15/packages/arduino/tools/avr-gcc/4.8.1-arduino5/lib/gcc/avr/4.9.3/include</Value>
+      <Value>{vm.intellisense.add-paths}</Value>
     </ListValues>
   </avrgcc.compiler.directories.IncludePaths>
   <avrgcc.compiler.optimization.level>Optimize for size (-Os)</avrgcc.compiler.optimization.level>
@@ -93,7 +92,7 @@
     <ListValues>
       <Value>__AVR_ATtiny85__</Value>
       <Value>__AVR_ATTINY85__</Value>
-      <Value>ARDUINO=10801</Value>
+      <Value>ARDUINO=108010</Value>
       <Value>ARDUINO_MAIN</Value>
       <Value>F_CPU=16500000L</Value>
       <Value>__AVR__</Value>
@@ -104,16 +103,15 @@
   <avrgcccpp.compiler.directories.IncludePaths>
     <ListValues>
       <Value>../../../digi_new_year_led</Value>
-      <Value>C:/Program Files (x86)/Atmel/Studio/7.0/Extensions/szza0s0v.md3/Micro Platforms/visualmicro/ide-atmel/libraries</Value>
-      <Value>C:/Users/USER/AppData/Local/arduino15/packages/digistump/hardware/avr/1.6.7/libraries</Value>
-      <Value>C:/Users/USER/Documents/Arduino/libraries</Value>
       <Value>C:/Users/USER/AppData/Local/arduino15/packages/digistump/hardware/avr/1.6.7/cores/tiny</Value>
       <Value>C:/Users/USER/AppData/Local/arduino15/packages/digistump/hardware/avr/1.6.7/variants/digispark</Value>
-      <Value>C:/Users/USER/AppData/Local/arduino15/packages/arduino/tools/avr-gcc/4.8.1-arduino5/avr/include/</Value>
-      <Value>C:/Users/USER/AppData/Local/arduino15/packages/arduino/tools/avr-gcc/4.8.1-arduino5/avr/include/avr/</Value>
-      <Value>C:/Users/USER/AppData/Local/arduino15/packages/arduino/tools/avr-gcc/4.8.1-arduino5/lib/gcc/avr/4.8.1/include</Value>
+      <Value>C:/Users/USER/AppData/Local/arduino15/packages/arduino/tools/avr-gcc/4.8.1-arduino5//lib/gcc/avr/7.3.0/include</Value>
+      <Value>C:/Users/USER/AppData/Local/arduino15/packages/arduino/tools/avr-gcc/4.8.1-arduino5/avr/include</Value>
+      <Value>C:/Users/USER/AppData/Local/arduino15/packages/arduino/tools/avr-gcc/4.8.1-arduino5/avr/include-fixed</Value>
+      <Value>C:/Users/USER/AppData/Local/arduino15/packages/arduino/tools/avr-gcc/4.8.1-arduino5/avr/include/avr</Value>
       <Value>C:/Users/USER/AppData/Local/arduino15/packages/arduino/tools/avr-gcc/4.8.1-arduino5/lib/gcc/avr/4.9.2/include</Value>
       <Value>C:/Users/USER/AppData/Local/arduino15/packages/arduino/tools/avr-gcc/4.8.1-arduino5/lib/gcc/avr/4.9.3/include</Value>
+      <Value>{vm.intellisense.add-paths}</Value>
     </ListValues>
   </avrgcccpp.compiler.directories.IncludePaths>
   <avrgcccpp.compiler.optimization.level>Optimize for size (-Os)</avrgcccpp.compiler.optimization.level>
@@ -124,13 +122,13 @@
   <avrgcccpp.compiler.miscellaneous.OtherFlags>-std=gnu99</avrgcccpp.compiler.miscellaneous.OtherFlags>
   <avrgcccpp.assembler.general.IncludePaths>
     <ListValues>
-      <Value>%24(PackRepoDir)\atmel\ATtiny_DFP\1.3.147\include</Value>
+      <Value>%24(PackRepoDir)\atmel\ATtiny_DFP\1.3.229\include</Value>
     </ListValues>
   </avrgcccpp.assembler.general.IncludePaths>
   <avrgcccpp.assembler.debugging.DebugLevel>Default (-Wa,-g)</avrgcccpp.assembler.debugging.DebugLevel>
 </AvrGccCpp>
     </ToolchainSettings>
-    <VMSETTING_IncludePaths>../../../digi_new_year_led;C:/Program Files (x86)/Arduino/libraries;C:/Users/USER/AppData/Local/arduino15/packages/digistump/hardware/avr/1.6.7/libraries;C:/Users/USER/Documents/Arduino/libraries;C:/Users/USER/AppData/Local/arduino15/packages/digistump/hardware/avr/1.6.7/cores/tiny;C:/Users/USER/AppData/Local/arduino15/packages/digistump/hardware/avr/1.6.7/variants/digispark;C:/Users/USER/AppData/Local/arduino15/packages/arduino/tools/avr-gcc/4.8.1-arduino5/avr/include/;C:/Users/USER/AppData/Local/arduino15/packages/arduino/tools/avr-gcc/4.8.1-arduino5/avr/include/avr/;C:/Users/USER/AppData/Local/arduino15/packages/arduino/tools/avr-gcc/4.8.1-arduino5/lib/gcc/avr/4.8.1/include;C:/Users/USER/AppData/Local/arduino15/packages/arduino/tools/avr-gcc/4.8.1-arduino5/lib/gcc/avr/4.9.2/include;C:/Users/USER/AppData/Local/arduino15/packages/arduino/tools/avr-gcc/4.8.1-arduino5/lib/gcc/avr/4.9.3/include;C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries;C:/Program Files (x86)/Arduino/hardware/arduino/avr/cores/arduino;C:/Program Files (x86)/Arduino/hardware/arduino/avr/variants/eightanaloginputs;C:/Program Files (x86)/Arduino/hardware/tools/avr/avr/include/;C:/Program Files (x86)/Arduino/hardware/tools/avr/avr/include/avr/;C:/Program Files (x86)/Arduino/hardware/tools/avr/lib/gcc/avr/4.8.1/include;C:/Program Files (x86)/Arduino/hardware/tools/avr/lib/gcc/avr/4.9.2/include;C:/Program Files (x86)/Arduino/hardware/tools/avr/lib/gcc/avr/4.9.3/include;C:/Program Files (x86)/Atmel/Studio/7.0/Extensions/szza0s0v.md3/Micro Platforms/visualmicro/ide-atmel/libraries;</VMSETTING_IncludePaths>
+    <VMSETTING_IncludePaths>../../../digi_new_year_led;C:/Program Files (x86)/Arduino/libraries;C:/Users/USER/AppData/Local/arduino15/packages/digistump/hardware/avr/1.6.7/libraries;C:/Users/USER/Documents/Arduino/libraries;C:/Users/USER/AppData/Local/arduino15/packages/digistump/hardware/avr/1.6.7/cores/tiny;C:/Users/USER/AppData/Local/arduino15/packages/digistump/hardware/avr/1.6.7/variants/digispark;C:/Users/USER/AppData/Local/arduino15/packages/arduino/tools/avr-gcc/4.8.1-arduino5/avr/include/;C:/Users/USER/AppData/Local/arduino15/packages/arduino/tools/avr-gcc/4.8.1-arduino5/avr/include/avr/;C:/Users/USER/AppData/Local/arduino15/packages/arduino/tools/avr-gcc/4.8.1-arduino5/lib/gcc/avr/4.8.1/include;C:/Users/USER/AppData/Local/arduino15/packages/arduino/tools/avr-gcc/4.8.1-arduino5/lib/gcc/avr/4.9.2/include;C:/Users/USER/AppData/Local/arduino15/packages/arduino/tools/avr-gcc/4.8.1-arduino5/lib/gcc/avr/4.9.3/include;C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries;C:/Program Files (x86)/Arduino/hardware/arduino/avr/cores/arduino;C:/Program Files (x86)/Arduino/hardware/arduino/avr/variants/eightanaloginputs;C:/Program Files (x86)/Arduino/hardware/tools/avr/avr/include/;C:/Program Files (x86)/Arduino/hardware/tools/avr/avr/include/avr/;C:/Program Files (x86)/Arduino/hardware/tools/avr/lib/gcc/avr/4.8.1/include;C:/Program Files (x86)/Arduino/hardware/tools/avr/lib/gcc/avr/4.9.2/include;C:/Program Files (x86)/Arduino/hardware/tools/avr/lib/gcc/avr/4.9.3/include;C:/Program Files (x86)/Atmel/Studio/7.0/Extensions/szza0s0v.md3/Micro Platforms/visualmicro/ide-atmel/libraries;C:/Users/USER/AppData/Local/arduino15/packages/arduino/tools/avr-gcc/4.8.1-arduino5//lib/gcc/avr/7.3.0/include;C:/Users/USER/AppData/Local/arduino15/packages/arduino/tools/avr-gcc/4.8.1-arduino5/avr/include;C:/Users/USER/AppData/Local/arduino15/packages/arduino/tools/avr-gcc/4.8.1-arduino5/avr/include-fixed;C:/Users/USER/AppData/Local/arduino15/packages/arduino/tools/avr-gcc/4.8.1-arduino5/avr/include/avr;{vm.intellisense.add-paths};</VMSETTING_IncludePaths>
     <VisualMicroSettings>
       <VisualMicroSettings>
         <ValidatedAS7>1</ValidatedAS7>
@@ -292,7 +290,7 @@ vmresolved.tools.path=C:\Users\USER\AppData\Local\arduino15\packages\arduino\too
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <ToolchainSettings>
       <AvrGccCpp>
-  <avrgcc.common.Device>-mmcu=attiny85 -B "%24(PackRepoDir)\atmel\ATtiny_DFP\1.3.147\gcc\dev\attiny85"</avrgcc.common.Device>
+  <avrgcc.common.Device>-mmcu=attiny85 -B "%24(PackRepoDir)\atmel\ATtiny_DFP\1.3.229\gcc\dev\attiny85"</avrgcc.common.Device>
   <avrgcc.common.outputfiles.hex>True</avrgcc.common.outputfiles.hex>
   <avrgcc.common.outputfiles.lss>True</avrgcc.common.outputfiles.lss>
   <avrgcc.common.outputfiles.eep>True</avrgcc.common.outputfiles.eep>
@@ -304,7 +302,7 @@ vmresolved.tools.path=C:\Users\USER\AppData\Local\arduino15\packages\arduino\too
     <ListValues>
       <Value>__AVR_ATtiny85__</Value>
       <Value>__AVR_ATTINY85__</Value>
-      <Value>ARDUINO=10801</Value>
+      <Value>ARDUINO=108010</Value>
       <Value>ARDUINO_MAIN</Value>
       <Value>F_CPU=16500000L</Value>
       <Value>__AVR__</Value>
@@ -315,16 +313,15 @@ vmresolved.tools.path=C:\Users\USER\AppData\Local\arduino15\packages\arduino\too
   <avrgcc.compiler.directories.IncludePaths>
     <ListValues>
       <Value>../../../digi_new_year_led</Value>
-      <Value>C:/Program Files (x86)/Atmel/Studio/7.0/Extensions/szza0s0v.md3/Micro Platforms/visualmicro/ide-atmel/libraries</Value>
-      <Value>C:/Users/USER/AppData/Local/arduino15/packages/digistump/hardware/avr/1.6.7/libraries</Value>
-      <Value>C:/Users/USER/Documents/Arduino/libraries</Value>
       <Value>C:/Users/USER/AppData/Local/arduino15/packages/digistump/hardware/avr/1.6.7/cores/tiny</Value>
       <Value>C:/Users/USER/AppData/Local/arduino15/packages/digistump/hardware/avr/1.6.7/variants/digispark</Value>
-      <Value>C:/Users/USER/AppData/Local/arduino15/packages/arduino/tools/avr-gcc/4.8.1-arduino5/avr/include/</Value>
-      <Value>C:/Users/USER/AppData/Local/arduino15/packages/arduino/tools/avr-gcc/4.8.1-arduino5/avr/include/avr/</Value>
-      <Value>C:/Users/USER/AppData/Local/arduino15/packages/arduino/tools/avr-gcc/4.8.1-arduino5/lib/gcc/avr/4.8.1/include</Value>
+      <Value>C:/Users/USER/AppData/Local/arduino15/packages/arduino/tools/avr-gcc/4.8.1-arduino5//lib/gcc/avr/7.3.0/include</Value>
+      <Value>C:/Users/USER/AppData/Local/arduino15/packages/arduino/tools/avr-gcc/4.8.1-arduino5/avr/include</Value>
+      <Value>C:/Users/USER/AppData/Local/arduino15/packages/arduino/tools/avr-gcc/4.8.1-arduino5/avr/include-fixed</Value>
+      <Value>C:/Users/USER/AppData/Local/arduino15/packages/arduino/tools/avr-gcc/4.8.1-arduino5/avr/include/avr</Value>
       <Value>C:/Users/USER/AppData/Local/arduino15/packages/arduino/tools/avr-gcc/4.8.1-arduino5/lib/gcc/avr/4.9.2/include</Value>
       <Value>C:/Users/USER/AppData/Local/arduino15/packages/arduino/tools/avr-gcc/4.8.1-arduino5/lib/gcc/avr/4.9.3/include</Value>
+      <Value>{vm.intellisense.add-paths}</Value>
     </ListValues>
   </avrgcc.compiler.directories.IncludePaths>
   <avrgcc.compiler.optimization.level>Optimize for size (-Os)</avrgcc.compiler.optimization.level>
@@ -339,7 +336,7 @@ vmresolved.tools.path=C:\Users\USER\AppData\Local\arduino15\packages\arduino\too
     <ListValues>
       <Value>__AVR_ATtiny85__</Value>
       <Value>__AVR_ATTINY85__</Value>
-      <Value>ARDUINO=10801</Value>
+      <Value>ARDUINO=108010</Value>
       <Value>ARDUINO_MAIN</Value>
       <Value>F_CPU=16500000L</Value>
       <Value>__AVR__</Value>
@@ -350,16 +347,15 @@ vmresolved.tools.path=C:\Users\USER\AppData\Local\arduino15\packages\arduino\too
   <avrgcccpp.compiler.directories.IncludePaths>
     <ListValues>
       <Value>../../../digi_new_year_led</Value>
-      <Value>C:/Program Files (x86)/Atmel/Studio/7.0/Extensions/szza0s0v.md3/Micro Platforms/visualmicro/ide-atmel/libraries</Value>
-      <Value>C:/Users/USER/AppData/Local/arduino15/packages/digistump/hardware/avr/1.6.7/libraries</Value>
-      <Value>C:/Users/USER/Documents/Arduino/libraries</Value>
       <Value>C:/Users/USER/AppData/Local/arduino15/packages/digistump/hardware/avr/1.6.7/cores/tiny</Value>
       <Value>C:/Users/USER/AppData/Local/arduino15/packages/digistump/hardware/avr/1.6.7/variants/digispark</Value>
-      <Value>C:/Users/USER/AppData/Local/arduino15/packages/arduino/tools/avr-gcc/4.8.1-arduino5/avr/include/</Value>
-      <Value>C:/Users/USER/AppData/Local/arduino15/packages/arduino/tools/avr-gcc/4.8.1-arduino5/avr/include/avr/</Value>
-      <Value>C:/Users/USER/AppData/Local/arduino15/packages/arduino/tools/avr-gcc/4.8.1-arduino5/lib/gcc/avr/4.8.1/include</Value>
+      <Value>C:/Users/USER/AppData/Local/arduino15/packages/arduino/tools/avr-gcc/4.8.1-arduino5//lib/gcc/avr/7.3.0/include</Value>
+      <Value>C:/Users/USER/AppData/Local/arduino15/packages/arduino/tools/avr-gcc/4.8.1-arduino5/avr/include</Value>
+      <Value>C:/Users/USER/AppData/Local/arduino15/packages/arduino/tools/avr-gcc/4.8.1-arduino5/avr/include-fixed</Value>
+      <Value>C:/Users/USER/AppData/Local/arduino15/packages/arduino/tools/avr-gcc/4.8.1-arduino5/avr/include/avr</Value>
       <Value>C:/Users/USER/AppData/Local/arduino15/packages/arduino/tools/avr-gcc/4.8.1-arduino5/lib/gcc/avr/4.9.2/include</Value>
       <Value>C:/Users/USER/AppData/Local/arduino15/packages/arduino/tools/avr-gcc/4.8.1-arduino5/lib/gcc/avr/4.9.3/include</Value>
+      <Value>{vm.intellisense.add-paths}</Value>
     </ListValues>
   </avrgcccpp.compiler.directories.IncludePaths>
   <avrgcccpp.compiler.optimization.level>Optimize for size (-Os)</avrgcccpp.compiler.optimization.level>
@@ -370,13 +366,13 @@ vmresolved.tools.path=C:\Users\USER\AppData\Local\arduino15\packages\arduino\too
   <avrgcccpp.compiler.miscellaneous.OtherFlags>-std=gnu99</avrgcccpp.compiler.miscellaneous.OtherFlags>
   <avrgcccpp.assembler.general.IncludePaths>
     <ListValues>
-      <Value>%24(PackRepoDir)\atmel\ATtiny_DFP\1.3.147\include</Value>
+      <Value>%24(PackRepoDir)\atmel\ATtiny_DFP\1.3.229\include</Value>
     </ListValues>
   </avrgcccpp.assembler.general.IncludePaths>
   <avrgcccpp.assembler.debugging.DebugLevel>Default (-Wa,-g)</avrgcccpp.assembler.debugging.DebugLevel>
 </AvrGccCpp>
     </ToolchainSettings>
-    <VMSETTING_IncludePaths>../../../digi_new_year_led;C:/Program Files (x86)/Arduino/libraries;C:/Users/USER/AppData/Local/arduino15/packages/digistump/hardware/avr/1.6.7/libraries;C:/Users/USER/Documents/Arduino/libraries;C:/Users/USER/AppData/Local/arduino15/packages/digistump/hardware/avr/1.6.7/cores/tiny;C:/Users/USER/AppData/Local/arduino15/packages/digistump/hardware/avr/1.6.7/variants/digispark;C:/Users/USER/AppData/Local/arduino15/packages/arduino/tools/avr-gcc/4.8.1-arduino5/avr/include/;C:/Users/USER/AppData/Local/arduino15/packages/arduino/tools/avr-gcc/4.8.1-arduino5/avr/include/avr/;C:/Users/USER/AppData/Local/arduino15/packages/arduino/tools/avr-gcc/4.8.1-arduino5/lib/gcc/avr/4.8.1/include;C:/Users/USER/AppData/Local/arduino15/packages/arduino/tools/avr-gcc/4.8.1-arduino5/lib/gcc/avr/4.9.2/include;C:/Users/USER/AppData/Local/arduino15/packages/arduino/tools/avr-gcc/4.8.1-arduino5/lib/gcc/avr/4.9.3/include;C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries;C:/Program Files (x86)/Arduino/hardware/arduino/avr/cores/arduino;C:/Program Files (x86)/Arduino/hardware/arduino/avr/variants/eightanaloginputs;C:/Program Files (x86)/Arduino/hardware/tools/avr/avr/include/;C:/Program Files (x86)/Arduino/hardware/tools/avr/avr/include/avr/;C:/Program Files (x86)/Arduino/hardware/tools/avr/lib/gcc/avr/4.8.1/include;C:/Program Files (x86)/Arduino/hardware/tools/avr/lib/gcc/avr/4.9.2/include;C:/Program Files (x86)/Arduino/hardware/tools/avr/lib/gcc/avr/4.9.3/include;C:/Program Files (x86)/Atmel/Studio/7.0/Extensions/szza0s0v.md3/Micro Platforms/visualmicro/ide-atmel/libraries;</VMSETTING_IncludePaths>
+    <VMSETTING_IncludePaths>../../../digi_new_year_led;C:/Program Files (x86)/Arduino/libraries;C:/Users/USER/AppData/Local/arduino15/packages/digistump/hardware/avr/1.6.7/libraries;C:/Users/USER/Documents/Arduino/libraries;C:/Users/USER/AppData/Local/arduino15/packages/digistump/hardware/avr/1.6.7/cores/tiny;C:/Users/USER/AppData/Local/arduino15/packages/digistump/hardware/avr/1.6.7/variants/digispark;C:/Users/USER/AppData/Local/arduino15/packages/arduino/tools/avr-gcc/4.8.1-arduino5/avr/include/;C:/Users/USER/AppData/Local/arduino15/packages/arduino/tools/avr-gcc/4.8.1-arduino5/avr/include/avr/;C:/Users/USER/AppData/Local/arduino15/packages/arduino/tools/avr-gcc/4.8.1-arduino5/lib/gcc/avr/4.8.1/include;C:/Users/USER/AppData/Local/arduino15/packages/arduino/tools/avr-gcc/4.8.1-arduino5/lib/gcc/avr/4.9.2/include;C:/Users/USER/AppData/Local/arduino15/packages/arduino/tools/avr-gcc/4.8.1-arduino5/lib/gcc/avr/4.9.3/include;C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries;C:/Program Files (x86)/Arduino/hardware/arduino/avr/cores/arduino;C:/Program Files (x86)/Arduino/hardware/arduino/avr/variants/eightanaloginputs;C:/Program Files (x86)/Arduino/hardware/tools/avr/avr/include/;C:/Program Files (x86)/Arduino/hardware/tools/avr/avr/include/avr/;C:/Program Files (x86)/Arduino/hardware/tools/avr/lib/gcc/avr/4.8.1/include;C:/Program Files (x86)/Arduino/hardware/tools/avr/lib/gcc/avr/4.9.2/include;C:/Program Files (x86)/Arduino/hardware/tools/avr/lib/gcc/avr/4.9.3/include;C:/Program Files (x86)/Atmel/Studio/7.0/Extensions/szza0s0v.md3/Micro Platforms/visualmicro/ide-atmel/libraries;C:/Users/USER/AppData/Local/arduino15/packages/arduino/tools/avr-gcc/4.8.1-arduino5//lib/gcc/avr/7.3.0/include;C:/Users/USER/AppData/Local/arduino15/packages/arduino/tools/avr-gcc/4.8.1-arduino5/avr/include;C:/Users/USER/AppData/Local/arduino15/packages/arduino/tools/avr-gcc/4.8.1-arduino5/avr/include-fixed;C:/Users/USER/AppData/Local/arduino15/packages/arduino/tools/avr-gcc/4.8.1-arduino5/avr/include/avr;{vm.intellisense.add-paths};</VMSETTING_IncludePaths>
     <VisualMicroSettings>
       <VisualMicroSettings>
         <ValidatedAS7>1</ValidatedAS7>
@@ -567,9 +563,6 @@ vmresolved.tools.path=C:\Users\USER\AppData\Local\arduino15\packages\arduino\too
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="led_sk6812.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="led_ws2812.cpp">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="led_ws2812.h">
