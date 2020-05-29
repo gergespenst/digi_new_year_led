@@ -18,8 +18,7 @@
     <ToolchainFlavour>Native</ToolchainFlavour>
     <KeepTimersRunning>true</KeepTimersRunning>
     <OverrideVtor>false</OverrideVtor>
-    <OverrideVtorValue>
-    </OverrideVtorValue>
+    <OverrideVtorValue>exception_table</OverrideVtorValue>
     <eraseonlaunchrule>0</eraseonlaunchrule>
     <ProgFlashFromRam>true</ProgFlashFromRam>
     <RamSnippetAddress>0x20000000</RamSnippetAddress>
@@ -562,6 +561,12 @@ vmresolved.tools.path=C:\Users\USER\AppData\Local\arduino15\packages\arduino\too
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="led_effects.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="led_sk6812.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="led_sk6812.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="led_ws2812.cpp">
