@@ -11,7 +11,7 @@
 
 #ifdef STM8
 	 #include "stm8s.h"
-	 #define NUM_OF_LEDS 5
+	 #define NUM_OF_LEDS 20
 	 #define LED_GPIO_PORT GPIOC
 	 #define LED_GPIO_NUM_PIN 6
 	 #define LED_GPIO_PIN  (1 << LED_GPIO_NUM_PIN)
@@ -30,7 +30,7 @@
  #include <stdint.h>
  #include <avr/io.h>
 
- #define NUM_OF_LEDS 5
+ #define NUM_OF_LEDS 20
  #define LED_GPIO_PORT PORTB
  #define LED_GPIO_DIR  DDRB
  #define LED_GPIO_NUM_PIN PB3

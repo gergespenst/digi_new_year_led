@@ -108,23 +108,46 @@ void long_press(uint8_t key){
 		}
 }
 
+void ChangeColor(){
+	static uint8_t state = 0;
+	if(state == 0){
+		for(uint8_t i =0; i <20;i++){
+			SetPixelColor(i,255,0,255,255,255);
+		}	
+		state = 1;
+	}else{
+				for(uint8_t i =0; i <20;i++){
+					SetPixelColor(i,0,0,0,255,255);
+				}
+		state = 0;
+	}
+	SendAllPixels();
+}
+
 __ATTR_NORETURN__ int main(){
 	
 	InitBlink();
 	InitSysTimer();	
-	InitWS2110();
+	//InitWS2110();
+	INIT_LED_GPIO();
 	//InitTestWS2110();
 	//InitAdcKeyboard(callbac,long_press);
 	//InitACEffects();
 
 	sei();
 	//AddTask(ScanKayboard,0,100);
-	SetPixelColor(0,255,0,0,0,255);
-	SetPixelColor(0,0,255,0,0,255);
-	SetPixelColor(0,0,0,255,0,255);
-	SetPixelColor(0,0,0,0,255,255);
-	SetPixelColor(0,255,255,255,0,255);
+	for(uint8_t i=0;i<4;i++){
+	SetPixelColor(0+5*i,255,0,0,0,255);
+	SetPixelColor(1+5*i,0,255,0,0,255);
+	SetPixelColor(2+5*i,0,0,255,0,255);
+	SetPixelColor(3+5*i,0,0,0,255,255);
+	SetPixelColor(4+5*i,255,255,255,0,255);
+	}
+	for(uint8_t i =0; i <20;i++){
+		SetPixelColor(i,255,0,0,255,255);
+	}
 	SendAllPixels();
+	AddTask(ChangeColor,30000,30000);
 	while (1)
 	{
 		Dispatcher();
